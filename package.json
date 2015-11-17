@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "Mean sample social app from MEAN stack book",
   "main": "app.js",
+  "engines": {
+    "node": "4.1.1"
+  },
   "dependencies": {
     "bcrypt": "^0.8.4",
     "body-parser": "~1.13.2",
@@ -17,7 +20,8 @@
     "jwt-simple": "^0.3.0",
     "lodash": "^3.10.0",
     "ws": "^0.7.2",
-    "wscat": "^1.0.0"
+    "wscat": "^1.0.0",
+    "mongoose": "~4.2.4"
   },
   "devDependencies": {
     "chai": "^3.2.0",
@@ -42,5 +46,6 @@
   "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/vishivish18/mean-social-app/issues"
-  }
+  },
+  "scripts" : { "start" : "gulp dev" }
 }
