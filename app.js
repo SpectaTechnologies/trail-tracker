@@ -8,6 +8,7 @@ var Post = require('./app/models/post')
 var bodyParser = require('body-parser');
 var app = express();
 
+console.log("hello");
 //app.use(morgan('dev'));
 app.use('/api/route', router);
 app.use(bodyParser.json()); // support json encoded bodies
