@@ -3,6 +3,7 @@
 var express = require('express');
 var router = express.Router(); // get an instance of the express Router
 var morgan = require('morgan');
+var io = require('./io')
 
 var Post = require('./app/models/post')
 var bodyParser = require('body-parser');
@@ -21,9 +22,21 @@ app.use('/api/sessions', require('./app/controllers/api/sessions'))
 app.use('/api/vehicle', require('./app/controllers/api/vehicle'))
 app.use('/', require('./app/controllers/static'))
 
+
+
+
 var port = process.env.PORT || 3000
 var server = app.listen(port, function() {
     console.log('App listening at the ', port);
 });
 
-require('./websockets').connect(server)
+io.attach(server);
+
+app.get('/hello',function(req,res){
+	var data ="hello from the other side"
+	io.emit('this_is_it',data)
+	console.log("done with this")
+	
+})
+
+

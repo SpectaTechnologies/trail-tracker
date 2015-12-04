@@ -6,8 +6,8 @@
     <meta name="language" content="en-us" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">    
-    <link rel="stylesheet" type="text/css" href="/css/app.css">    
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/app.css">
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Latest compiled JavaScript -->
@@ -15,8 +15,26 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN5qloAyePUfH9fr4aMKuXvxu8rS0fZIU"></script>
     <base href="/" />
 </head>
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 
 <body ng-app="app" ng-controller="masterCtrl">
+    <ul id="messages"></ul>
+    <form action="">
+        <input id="m" autocomplete="off" />
+        <button>Send</button>
+    </form>
+    <script>
+    var socket = io();
+    $('form').submit(function() {
+        socket.emit('chat message', $('#m').val());
+        $('#m').val('');
+        return false;
+    });
+    socket.on("this_is_it", function(data) {    
+    console.log("data from the server", data);    
+    });
+    
+    </script>
     <div ui-view="header"></div>
     <div ui-view="content"></div>
     <div ui-view="footer"></div>
