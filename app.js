@@ -8,7 +8,7 @@ var io = require('./io')
 var Post = require('./app/models/post')
 var bodyParser = require('body-parser');
 var app = express();
-
+var Location = require('./app/models/location')
 //app.use(morgan('dev'));
 app.use('/api/route', router);
 app.use(bodyParser.json()); // support json encoded bodies
@@ -32,11 +32,33 @@ var server = app.listen(port, function() {
 
 io.attach(server);
 
-app.get('/hello',function(req,res){
-	var data ="hello from the other side"
-	io.emit('this_is_it',data)
-	console.log("done with this")
-	
-})
+/*app.post('/hello/:id', function (req, res) {
+  		var location = 24;
+  		io.emit('this_is_it', location)
+        console.log("done with this")
+});
+*/
 
+app.post('/hello/:vehicle_id', function(req, res, next) {
+    //res.end(req.params.vehicle_id);
 
+    var location = new Location({
+        device_id: req.params.vehicle_id,
+        latitude: req.body.latitude,
+        longitude: req.body.longitude,
+        speed: req.body.speed
+    })
+
+    location.save(function(err, location) {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        // res.send(201)       
+        console.log("Got new location")
+        //res.json(location);        
+        io.emit('this_is_it', location)
+        console.log("done with this")
+
+    })
+
+});

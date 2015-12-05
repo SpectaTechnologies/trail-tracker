@@ -42,7 +42,7 @@ router.post('/', function(req, res, next) {
 })
 
 
-router.post('/location/:vehicle_id', function(req, res, next) {
+/*router.post('/location/:vehicle_id', function(req, res, next) {
     //res.end(req.params.vehicle_id);
 
     var location = new Location({
@@ -63,7 +63,7 @@ router.post('/location/:vehicle_id', function(req, res, next) {
     })
 
 });
-
+*/
 router.get('/location/:vehicle_id', function(req, res, next) {
     //res.end(req.params.vehicle_id);
     Location.findOne({
