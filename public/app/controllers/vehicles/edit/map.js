@@ -42,10 +42,14 @@ angular.module('app')
 
         $scope.setup();
 
-        socket.on("this_is_it", function(data) {
+        socket.on("location_updated", function(data) {
             console.log("data from the server", data);
             $scope.test = data;
-            $scope.setup();
+            $scope.latitude = data.latitude;
+            $scope.longitude = data.longitude;
+            $scope.markOnMap($scope.latitude, $scope.longitude);            
+
+            //$scope.setup();
         });
 
 

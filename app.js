@@ -56,7 +56,7 @@ app.post('/hello/:vehicle_id', function(req, res, next) {
         // res.send(201)       
         console.log("Got new location")
         //res.json(location);        
-        io.emit('this_is_it', location)
+        io.emit('location_updated', location)
         console.log("done with this")
 
     })
