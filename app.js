@@ -58,6 +58,7 @@ app.post('/hello/:vehicle_id', function(req, res, next) {
         //res.json(location);        
         io.emit('location_updated', location)
         console.log("done with this")
+        res.send(location,201) 
 
     })
 
