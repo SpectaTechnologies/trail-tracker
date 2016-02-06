@@ -9,12 +9,25 @@ var Post = require('./app/models/post')
 var bodyParser = require('body-parser');
 var app = express();
 var Location = require('./app/models/location')
+
+var fs = require('fs');
+var util = require('util');
+var log_file = fs.createWriteStream(__dirname + '/debug.log', {
+    flags: 'w'
+});
+var log_stdout = process.stdout;
+
+console.log = function(d) { //
+    log_file.write(util.format(d) + '\n');
+    log_stdout.write(util.format(d) + '\n');
+};
+
 //app.use(morgan('dev'));
 
 app.use(function(req, res, next) {
-   res.header("Access-Control-Allow-Origin", "*");
-   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-   next();
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
 });
 
 app.use('/api/route', router);
@@ -40,8 +53,8 @@ var server = app.listen(port, function() {
 io.attach(server);
 
 /*app.post('/hello/:id', function (req, res) {
-  		var location = 24;
-  		io.emit('this_is_it', location)
+        var location = 24;
+        io.emit('this_is_it', location)
         console.log("done with this")
 });
 */
@@ -62,10 +75,10 @@ app.post('/hello/:vehicle_id', function(req, res, next) {
         }
         // res.send(201)       
         console.log("Got new location")
-        //res.json(location);        
+            //res.json(location);        
         io.emit('location_updated', location)
         console.log("done with this")
-        res.send(location,201) 
+        res.send(location, 201)
 
     })
 
@@ -73,8 +86,9 @@ app.post('/hello/:vehicle_id', function(req, res, next) {
 
 
 app.post('/test', function(req, res, next) {
-    
-    var name = 'Ajita Weds '+req.body.name 
-    res.send(name,200);
+    console.log(req);
+
+    var name = 'Ajita Weds ' + req.body.name
+    res.send(name, 200);
 
 });
