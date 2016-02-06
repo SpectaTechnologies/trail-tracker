@@ -85,8 +85,7 @@ app.post('/hello/:vehicle_id', function(req, res, next) {
 });
 
 
-app.post('/test', function(req, res, next) {
-    console.log(req);
+app.post('/test', function(req, res, next) {    
 
     var name = 'Magic begins ' + req.body.name
     res.send(name, 200);
