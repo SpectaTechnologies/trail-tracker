@@ -10,6 +10,18 @@ var bodyParser = require('body-parser');
 var app = express();
 var Location = require('./app/models/location')
 
+var fs = require('fs');
+var util = require('util');
+var log_file = fs.createWriteStream(__dirname + '/debug.log', {
+    flags: 'w'
+});
+var log_stdout = process.stdout;
+
+console.log = function(d) { //
+    log_file.write(util.format(d) + '\n');
+    log_stdout.write(util.format(d) + '\n');
+};
+
 //app.use(morgan('dev'));
 
 app.use(function(req, res, next) {
@@ -49,7 +61,7 @@ io.attach(server);
 
 app.post('/hello/:vehicle_id', function(req, res, next) {
     //res.end(req.params.vehicle_id);
-    console.log(req.body)
+
     var location = new Location({
         device_id: req.params.vehicle_id,
         latitude: req.body.latitude,
@@ -73,12 +85,10 @@ app.post('/hello/:vehicle_id', function(req, res, next) {
 });
 
 
-app.post('/test', function(req, res, next) {    
-    console.log(req.body)
-    var result = "jab name wala bhejte ho to ye aata hai {name : 'abhishek'}" 
-    var result2 = ", jab location wala bhejo ho to ye aana chahiye  { longitude: '23', latitude: '10', speed: '24' }"
-    var result3 = ",but tum jab location bhejte ho to blank aata hai {}"
-    var name = result + result2 + result3
+app.post('/test', function(req, res, next) {
+    console.log(req.body);
+
+    var name = 'Magic begins ' + req.body.name
     res.send(name, 200);
 
 });
