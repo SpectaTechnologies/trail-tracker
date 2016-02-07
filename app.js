@@ -75,7 +75,10 @@ app.post('/hello/:vehicle_id', function(req, res, next) {
 
 app.post('/test', function(req, res, next) {    
     console.log(req.body)
-    var name = 'Magic begins ' + req.body.name
+    var result = "jab name wala bhejte ho to ye aata hai {name : 'abhishek'}" 
+    var result2 = ", jab location wala bhejo ho to ye aana chahiye  { longitude: '23', latitude: '10', speed: '24' }"
+    var result3 = ",but tum jab location bhejte ho to blank aata hai {}"
+    var name = result + result2 + result3
     res.send(name, 200);
 
 });
