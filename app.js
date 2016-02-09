@@ -22,6 +22,7 @@ console.log = function(d) { //
     log_stdout.write(util.format(d) + '\n');
 };
 
+console.log("hello");
 //app.use(morgan('dev'));
 
 app.use(function(req, res, next) {
