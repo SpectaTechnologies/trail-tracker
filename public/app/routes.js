@@ -17,6 +17,19 @@ angular.module('app')
         }
     })
 
+     .state('app.posts',{
+        url: '/posts',
+        views: {
+            'header': {
+                templateUrl: '/nav.html'
+            },
+            'content': {
+                templateUrl: '/posts.html' ,
+                controller: 'PostsCtrl'
+            }
+        }
+    })
+
     .state('app.login',{
         url: '/login',
         views: {

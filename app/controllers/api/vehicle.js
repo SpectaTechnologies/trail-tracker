@@ -5,6 +5,8 @@ var config = require('../../../config')
 
 
 
+
+
 //router.use here will fire with all the /api/vehicle calls,
 //this will act like a middleware for all routes specific to this.
 //This method can be used to secure routes
@@ -40,7 +42,7 @@ router.post('/', function(req, res, next) {
 })
 
 
-router.post('/location/:vehicle_id', function(req, res, next) {
+/*router.post('/location/:vehicle_id', function(req, res, next) {
     //res.end(req.params.vehicle_id);
 
     var location = new Location({
@@ -54,13 +56,14 @@ router.post('/location/:vehicle_id', function(req, res, next) {
         if (err) {
             return res.status(500).send(err);
         }
-        // res.send(201)
+        // res.send(201)       
+        console.log("Got new location")
         res.json(location);
 
     })
 
 });
-
+*/
 router.get('/location/:vehicle_id', function(req, res, next) {
     //res.end(req.params.vehicle_id);
     Location.findOne({
